@@ -1,33 +1,38 @@
-import { Text, View, StyleSheet, StatusBar } from "react-native";
-import Header from "./layout/Header";
-import { COLORS } from "@/constants/ui.ts";
-import type { Todo } from "@/src/types/todo.ts";
 import { useState } from "react";
+import { StatusBar, StyleSheet, View } from "react-native";
+
+import Header from "./layout/Header";
+
 import ToDoList from "@/src/app/layout/ToDoList";
+import { COLORS } from "@/src/constants/ui.ts";
+import type { Todo } from "@/src/types/todo.ts";
 
-const defaultTodos:Todo[] = [{
-  id:1,
-  title:'Buy milk',
-  isCompleted:false,
-}, {
-  id:2,
-  title:'Buy bread',
-  isCompleted:false,
-}, {
-  id: 3,
-  title:'Buy eggs',
-  isCompleted:false,
-}]
-
-
+const defaultTodos: Todo[] = [
+  {
+    id: 1,
+    title: "Buy milk",
+    isCompleted: false,
+  },
+  {
+    id: 2,
+    title: "Buy bread",
+    isCompleted: false,
+  },
+  {
+    id: 3,
+    title: "Buy eggs",
+    isCompleted: true,
+  },
+];
 
 export default function Index() {
+  const [todos, setTodos] = useState<Todo[]>(defaultTodos);
 
-  const [todos, setTodos] = useState<Todo[]>(defaultTodos)
+  const completedTodos = todos.filter((todo) => todo.isCompleted).length;
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
-      <Header />
+      <Header completedTodos={completedTodos} totalTodos={todos.length} />
       <ToDoList todos={todos} />
     </View>
   );
@@ -35,6 +40,7 @@ export default function Index() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: COLORS.PRIMARY_BACKGROUND,
   },
   title: {
