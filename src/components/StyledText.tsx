@@ -1,5 +1,6 @@
-import { COLORS } from "@/src/constants/ui.ts";
 import { StyleSheet, Text, type TextProps } from "react-native";
+
+import { COLORS } from "@/src/constants/ui.ts";
 
 type StyledTextProps = TextProps;
 
